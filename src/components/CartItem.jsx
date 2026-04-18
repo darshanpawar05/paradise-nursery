@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { increaseQty, decreaseQty, removeItem } from "../redux/CartSlice";
+import { updateQuantity, removeItem } from "../redux/CartSlice";
 
 export default function CartItem() {
   const items = useSelector(state => state.cart.items);
@@ -22,9 +22,13 @@ export default function CartItem() {
             <p>{item.name}</p>
             <p>₹{item.price}</p>
 
-            <button onClick={() => dispatch(increaseQty(item.id))}>+</button>
-            <button onClick={() => dispatch(decreaseQty(item.id))}>-</button>
+            <button onClick={() => dispatch(updateQuantity({ id: item.id, amount: 1 }))}>
+  +
+</button>
 
+<button onClick={() => dispatch(updateQuantity({ id: item.id, amount: -1 }))}>
+  -
+</button>
             <p>Qty: {item.quantity}</p>
             <p>Total: ₹{item.price * item.quantity}</p>
 
